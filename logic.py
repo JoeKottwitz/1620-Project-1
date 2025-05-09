@@ -26,11 +26,11 @@ class Logic(QMainWindow, Ui_MainWindow):
         self.label_error.setText('')
 
         if self.check_NUID(self.entry_nuid.text()):
-            self.entry_nuid.clear()
+            self.clear_gui()
             return
         if self.check_voter(self.entry_nuid.text()):
             self.label_error.setText(f"<font color='red'>Already voted. Cannot vote again.</font>")
-            self.entry_nuid.clear()
+            self.clear_gui()
             return
 
         candidate = self.check_candidate()
@@ -130,8 +130,7 @@ class Logic(QMainWindow, Ui_MainWindow):
         '''
         self.entry_nuid.clear()
 
-        self.radio_group.setExclusive(False)
-        self.radio_group.checkedButton().setChecked(False)
-        self.radio_group.setExclusive(True)
-
-        self.label_error.setText('')
+        if self.radio_candidate1.isChecked() or self.radio_candidate2.isChecked() or self.radio_candidate3.isChecked():
+            self.radio_group.setExclusive(False)
+            self.radio_group.checkedButton().setChecked(False)
+            self.radio_group.setExclusive(True)
